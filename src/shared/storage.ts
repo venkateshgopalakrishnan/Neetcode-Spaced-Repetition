@@ -1,8 +1,20 @@
 import { SM2State } from './sm2';
+import {
+  DEFAULT_HINT_PANEL_LAYOUT,
+  DEFAULT_OLLAMA_SETTINGS,
+  HintHistoryEntry,
+  HintPanelLayout,
+  LEGACY_DEFAULT_SYSTEM_PROMPT,
+  OllamaSettings,
+} from './ollama';
 
 export interface ProblemData extends SM2State {
   slug: string;
 }
+
+const OLLAMA_SETTINGS_KEY = 'ollama:settings';
+const HINT_HISTORY_PREFIX = 'ollama:hints:';
+const HINT_PANEL_LAYOUT_KEY = 'ollama:panel-layout';
 
 // Compress to "interval|ease|repetitions|nextReview"
 function serializeState(state: SM2State): string {
@@ -63,4 +75,46 @@ export const storage = {
     const now = Date.now();
     return all.filter(p => p.nextReview <= now);
   }
+};
+
+export const ollamaStorage = {
+  async getSettings(): Promise<OllamaSettings> {
+    const result = await chrome.storage.local.get(OLLAMA_SETTINGS_KEY);
+    const saved = result[OLLAMA_SETTINGS_KEY] as Partial<OllamaSettings> | undefined;
+    const systemPrompt = saved?.systemPrompt === LEGACY_DEFAULT_SYSTEM_PROMPT
+      ? DEFAULT_OLLAMA_SETTINGS.systemPrompt
+      : saved?.systemPrompt;
+    return {
+      ...DEFAULT_OLLAMA_SETTINGS,
+      ...saved,
+      ...(systemPrompt ? { systemPrompt } : {}),
+      learnerRequest: saved?.learnerRequest?.trim() || DEFAULT_OLLAMA_SETTINGS.learnerRequest,
+    };
+  },
+
+  async saveSettings(settings: OllamaSettings): Promise<void> {
+    await chrome.storage.local.set({ [OLLAMA_SETTINGS_KEY]: settings });
+  },
+
+  async getHintHistory(slug: string): Promise<HintHistoryEntry[]> {
+    const key = `${HINT_HISTORY_PREFIX}${slug}`;
+    const result = await chrome.storage.local.get(key);
+    return (result[key] as HintHistoryEntry[] | undefined) ?? [];
+  },
+
+  async saveHintHistory(slug: string, history: HintHistoryEntry[]): Promise<void> {
+    await chrome.storage.local.set({ [`${HINT_HISTORY_PREFIX}${slug}`]: history });
+  },
+
+  async getPanelLayout(): Promise<HintPanelLayout> {
+    const result = await chrome.storage.local.get(HINT_PANEL_LAYOUT_KEY);
+    return {
+      ...DEFAULT_HINT_PANEL_LAYOUT,
+      ...(result[HINT_PANEL_LAYOUT_KEY] as Partial<HintPanelLayout> | undefined),
+    };
+  },
+
+  async savePanelLayout(layout: HintPanelLayout): Promise<void> {
+    await chrome.storage.local.set({ [HINT_PANEL_LAYOUT_KEY]: layout });
+  },
 };

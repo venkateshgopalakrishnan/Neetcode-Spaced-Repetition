@@ -20,7 +20,7 @@ export default defineManifest({
     }
   },
   permissions: ['storage'],
-  host_permissions: ['*://*.neetcode.io/*'],
+  host_permissions: ['*://*.neetcode.io/*', 'http://localhost:11434/*'],
   background: {
     service_worker: 'src/background/service-worker.ts',
     type: 'module',
@@ -28,7 +28,7 @@ export default defineManifest({
   content_scripts: [
     {
       matches: ['*://*.neetcode.io/*'],
-      js: ['src/content/neetcode-detector.ts'],
+      js: ['src/content/neetcode-detector.ts', 'src/content/neetcode-hints.tsx'],
     }
   ],
 });

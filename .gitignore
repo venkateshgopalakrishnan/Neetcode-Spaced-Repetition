@@ -8,6 +8,11 @@
 *.swo
 .DS_Store
 
+# Environment files
+.env
+.env.*
+!.env.example
+
 # Logs
 logs
 *.log

@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.ollama-hint-root { all: initial; color-scheme: dark; }
+.ollama-hint-panel { position: fixed; z-index: 2147483647; min-width: 280px; min-height: 180px; max-width: calc(100vw - 24px); max-height: calc(100vh - 24px); overflow: auto; resize: both; padding: 14px; box-sizing: border-box; color: #f8fafc !important; background: #111827 !important; border: 1px solid #475569; border-radius: 12px; box-shadow: 0 8px 30px #00000099; font: 14px/1.4 system-ui, sans-serif; }
+.ollama-hint-panel strong { color: #f8fafc !important; }
+.ollama-hint-panel-collapsed { min-height: 0; resize: none; overflow: hidden; }
+.ollama-hint-header, .ollama-hint-actions, .ollama-hint-toolbar, .ollama-hint-history-heading { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.ollama-hint-title { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.ollama-hint-header { margin: -4px -4px 10px; padding: 4px; color: #f8fafc !important; font-size: 16px; cursor: grab; user-select: none; touch-action: none; }
+.ollama-hint-header:active { cursor: grabbing; }
+.ollama-hint-header-actions { display: flex; gap: 4px; }
+.ollama-hint-header button, .ollama-hint-delete { border: 0; color: #e2e8f0 !important; background: transparent !important; cursor: pointer; font-size: 16px; }
+.ollama-hint-header button:hover, .ollama-hint-delete:hover { color: #c4b5fd !important; background: #312e81 !important; border-radius: 4px; }
+.ollama-hint-toolbar { margin-bottom: 8px; color: #cbd5e1 !important; }
+.ollama-hint-history { margin: 8px 0; padding: 8px; color: #f8fafc !important; background: #1e293b !important; border: 1px solid #475569; border-radius: 8px; }
+.ollama-hint-history p { margin: 3px 0 0; color: #f8fafc !important; white-space: pre-wrap; }
+.ollama-hint-history code { padding: 1px 4px; color: #e9d5ff !important; background: #0f172a; border-radius: 4px; font-family: ui-monospace, SFMono-Regular, Consolas, monospace; }
+.ollama-hint-code { overflow-x: auto; margin: 8px 0 0; padding: 8px; color: #e2e8f0 !important; background: #020617; border: 1px solid #334155; border-radius: 6px; white-space: pre-wrap; }
+.ollama-hint-code code { padding: 0; background: transparent; }
+.ollama-hint-math { color: #a5b4fc !important; font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-style: italic; }
+.ollama-hint-history small, .ollama-hint-toolbar small { color: #cbd5e1 !important; }
+.ollama-hint-model { display: block; margin-top: 8px; color: #94a3b8 !important; font-size: 11px; }
+.ollama-health { display: inline-flex; align-items: center; gap: 4px; color: #cbd5e1 !important; font-size: 10px; font-weight: 600; white-space: nowrap; }
+.ollama-health-dot { width: 7px; height: 7px; background: #64748b; border-radius: 50%; }
+.ollama-health-online { color: #86efac !important; }
+.ollama-health-online .ollama-health-dot { background: #22c55e; }
+.ollama-health-checking .ollama-health-dot { background: #facc15; animation: ollama-pulse 1s infinite; }
+.ollama-health-offline { color: #fca5a5 !important; }
+.ollama-health-offline .ollama-health-dot { background: #ef4444; }
+.ollama-hint-settings label { display: block; margin: 8px 0; color: #f8fafc !important; font-size: 12px; font-weight: 600; }
+.ollama-hint-settings input, .ollama-hint-settings textarea { box-sizing: border-box; display: block; width: 100%; margin-top: 3px; padding: 6px; color: #f8fafc !important; background: #1e293b !important; border: 1px solid #64748b; border-radius: 5px; font: inherit; }
+.ollama-hint-settings textarea { min-height: 70px; resize: vertical; }
+.ollama-hint-actions button, .ollama-hint-primary { padding: 7px 12px; color: #fff !important; background: #4f46e5 !important; border: 0; border-radius: 6px; cursor: pointer; }
+.ollama-hint-actions button:disabled { cursor: not-allowed; opacity: .5; }
+.ollama-hint-settings-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; }
+.ollama-hint-secondary { padding: 7px 12px; color: #e2e8f0 !important; background: #334155 !important; border: 1px solid #64748b; border-radius: 6px; cursor: pointer; }
+.ollama-hint-health-message { color: #fca5a5 !important; font-size: 11px; }
+.ollama-hint-waiting { display: inline-flex; align-items: center; gap: 6px; color: #c4b5fd !important; font-size: 12px; }
+.ollama-hint-spinner { width: 11px; height: 11px; border: 2px solid #64748b; border-top-color: #a78bfa; border-radius: 50%; animation: ollama-spin .8s linear infinite; }
+.ollama-hint-live { color: #86efac !important; font-size: 10px; font-weight: 700; }
+.ollama-hint-danger-link { padding: 0; color: #fca5a5 !important; background: transparent !important; border: 0; cursor: pointer; font: inherit; }
+.ollama-hint-danger-link:disabled { cursor: not-allowed; opacity: .45; }
+.ollama-hint-error { padding: 7px; color: #fecaca !important; background: #450a0a !important; border-radius: 6px; }
+@keyframes ollama-spin { to { transform: rotate(360deg); } }
+@keyframes ollama-pulse { 50% { opacity: .35; } }
