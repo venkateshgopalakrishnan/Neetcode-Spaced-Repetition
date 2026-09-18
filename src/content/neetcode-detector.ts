@@ -1,5 +1,3 @@
-console.log('Neetcode Spaced Repetition content script injected.');
-
 function detectSuccessMessage(mutations: MutationRecord[]) {
   for (const mutation of mutations) {
     if (mutation.type === 'childList') {
@@ -42,8 +40,6 @@ function handleProblemSolved() {
   if (!match) return;
 
   const slug = match[1];
-  console.log(`Neetcode Spaced Repetition: Detected problem solved! Slug: ${slug}`);
-  
   chrome.runtime.sendMessage({
     type: 'PROBLEM_SOLVED',
     payload: { slug }
