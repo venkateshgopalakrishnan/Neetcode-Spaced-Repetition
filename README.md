@@ -66,7 +66,7 @@ ollama serve
 Because the extension runs in the browser, Ollama must allow the extension origin. Set `OLLAMA_ORIGINS` before starting Ollama (include the origin shown in the browser console if it differs):
 
 ```bash
-OLLAMA_ORIGINS="chrome-extension://*" ollama serve
+OLLAMA_ORIGINS="chrome-extension://*,https://neetcode.io,https://*.neetcode.io" ollama serve
 ```
 
 Use the injected panel's header to drag it out of the way of the Neetcode editor. Resize it from the lower-right corner, or use the collapse button for a compact header. The gear icon changes the endpoint, model, system prompt, or learner request. Both prompts have a **Restore default** control, and blank values cannot be saved. These settings, panel layout, and each problem's hint history are stored in Chrome local storage. Individual hints can be removed, or **Delete all** clears the current problem's history. Empty editor requests are blocked, and **Cancel** stops an in-progress stream. Network, HTTP, malformed-stream, and Ollama errors are shown in the panel.
